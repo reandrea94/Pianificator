@@ -319,88 +319,7 @@ body.readonly .ic-btn:not(.cmt):not(.asgn):not(.cfg){pointer-events:none;opacity
 .date-popup .cf-label{display:block;margin-bottom:3px;margin-top:8px}
 .date-popup .cf-label:first-child{margin-top:0}
 
-/* ========== RICERCA SPOTLIGHT ========== */
-#panel-ricerca{position:relative;overflow:hidden}
-
-#ricercaSearchWrap{
-  position:absolute;left:0;right:0;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:20px;
-  transition:top .35s cubic-bezier(.4,0,.2,1), padding .35s cubic-bezier(.4,0,.2,1);
-  top:50%;transform:translateY(-50%);
-  padding:0 24px;
-  z-index:10;
-}
-#panel-ricerca.has-results #ricercaSearchWrap{
-  position:relative;top:auto;transform:none;
-  padding:22px 24px 16px;
-  border-bottom:1px solid var(--border);
-  background:var(--surface);
-  flex-shrink:0;
-}
-#ricercaHint{
-  text-align:center;
-  transition:opacity .25s, max-height .3s;
-  max-height:100px;overflow:hidden;
-}
-#panel-ricerca.has-results #ricercaHint{
-  opacity:0;max-height:0;pointer-events:none;
-}
-#ricercaInputWrap{
-  display:flex;align-items:center;gap:12px;
-  width:100%;max-width:580px;
-  background:var(--surf2);
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:10px 16px;
-  transition:border-color .2s, box-shadow .2s, max-width .35s cubic-bezier(.4,0,.2,1);
-  box-shadow:0 4px 32px rgba(0,0,0,.4);
-}
-#ricercaInputWrap:focus-within{
-  border-color:var(--accent);
-  box-shadow:0 4px 40px rgba(91,156,246,.18);
-}
-#panel-ricerca.has-results #ricercaInputWrap{
-  max-width:660px;
-  border-radius:8px;
-  box-shadow:none;
-  padding:8px 14px;
-}
-#ricercaInput{
-  flex:1;background:transparent;border:none;outline:none;
-  color:var(--text);font-family:var(--sans);font-size:16px;
-  caret-color:var(--accent);
-}
-#panel-ricerca.has-results #ricercaInput{font-size:14px}
-#ricercaInput::placeholder{color:var(--text3)}
-#ricercaClearBtn{
-  background:none;border:none;color:var(--text3);cursor:pointer;
-  font-size:16px;padding:0 2px;line-height:1;
-  opacity:0;transition:opacity .15s,color .15s;pointer-events:none;
-}
-#ricercaInput:not(:placeholder-shown) ~ #ricercaClearBtn,
-#ricercaClearBtn.visible{opacity:1;pointer-events:auto}
-#ricercaClearBtn:hover{color:var(--red)}
-
-#ricercaResults{
-  overflow-y:auto;flex:1;
-  padding:20px 32px 24px;
-  opacity:0;
-  transition:opacity .25s .1s;
-}
-#panel-ricerca.has-results #ricercaResults{opacity:1}
-
-/* Animazione card in entrata */
-@keyframes cardIn{
-  from{opacity:0;transform:translateY(18px)}
-  to  {opacity:1;transform:translateY(0)}
-}
-.ricerca-card-anim{
-  animation:cardIn .3s cubic-bezier(.4,0,.2,1) both;
-}
 .gantt-scroll{flex:1;overflow:auto}
-/* Ricerca: nascondi divisore colonne quando in stack */
-@media(max-width:640px){.ricerca-col-divider{display:none!important}}
 .type-badge{font-family:var(--mono);font-size:10px;font-weight:700;padding:2px 5px;border-radius:3px;letter-spacing:.5px;cursor:pointer;user-select:none}
 .type-badge.dc{background:rgba(245,197,66,.15);color:var(--dc);border:1px solid var(--dc)}
 .type-badge.pre{background:rgba(91,156,246,.15);color:var(--pre);border:1px solid var(--pre)}
@@ -625,7 +544,6 @@ body.readonly .ic-btn:not(.cmt):not(.asgn):not(.cfg){pointer-events:none;opacity
 <!-- TOPBAR -->
 <div class="topbar">
   <div class="logo"><img src="logo.png" alt="Pianificator" style="height:40px;width:80px;object-fit:contain;display:block"></div>
-  <div class="tab" id="tab-ricerca" onclick="switchTab('ricerca')"><span>🔍</span> Ricerca</div>
   <div class="tab" id="tab-commesse" onclick="switchTab('commesse')"><span>☰</span> Commesse</div>
   <div class="tab" id="tab-gantt"     onclick="switchTab('gantt')"><span>▦</span> Gantt</div>
   <div class="tab" id="tab-rubrica"   onclick="switchTab('rubrica')"><span>👥</span> Rubrica</div>
@@ -736,25 +654,6 @@ body.readonly .ic-btn:not(.cmt):not(.asgn):not(.cfg){pointer-events:none;opacity
       <div id="rubDetailContent" style="display:none"></div>
     </div>
   </div>
-</div>
-
-<!-- PANEL: RICERCA -->
-<div class="panel active" id="panel-ricerca">
-  <div id="ricercaSearchWrap">
-    <div id="ricercaHint">
-      <span style="font-size:32px;display:block;margin-bottom:12px;opacity:.4">🔍</span>
-      <div style="font-family:var(--mono);font-size:13px;color:var(--text2);letter-spacing:1px">CERCA COMMESSA</div>
-      <div style="font-family:var(--sans);font-size:12px;color:var(--text3);margin-top:6px">N° commessa, cliente, descrizione, PM</div>
-    </div>
-    <div id="ricercaInputWrap">
-      <span style="font-size:18px;opacity:.5;flex-shrink:0">🔍</span>
-      <input id="ricercaInput" type="text"
-        placeholder="es. 2116 oppure Indinvest..."
-        oninput="renderRicerca()" autocomplete="off" spellcheck="false">
-      <button id="ricercaClearBtn" onclick="document.getElementById('ricercaInput').value='';renderRicerca()">✕</button>
-    </div>
-  </div>
-  <div id="ricercaResults"></div>
 </div>
 
 <!-- PANEL: ATTIVITÀ -->
@@ -1169,7 +1068,7 @@ let ganttRows  = [];
 let specDays   = {};
 let dirHandle  = null;
 let editMode   = false;
-let activeTab  = 'ricerca';
+let activeTab  = 'commesse';
 let hideCompleted = false;
 let sortDir    = null;
 let isDirty    = false;
@@ -1185,10 +1084,9 @@ function updateDirtyIndicator(){
 // ═══════════════════════════════════════════════
 //  TAB
 // ═══════════════════════════════════════════════
-let _ricercaDirty=false;
 function switchTab(tab) {
   activeTab = tab;
-  ['commesse','gantt','rubrica','attivita','ricerca'].forEach(t => {
+  ['commesse','gantt','rubrica','attivita'].forEach(t => {
     document.getElementById('tab-'+t).classList.toggle('active', tab===t);
     document.getElementById('panel-'+t).classList.toggle('active', tab===t);
   });
@@ -1198,8 +1096,6 @@ function switchTab(tab) {
   if (tab==='gantt')    renderGantt();
   if (tab==='rubrica')  renderRubrica();
   if (tab==='attivita') renderAttivita();
-  if (tab==='ricerca'&&_ricercaDirty) { renderRicerca(); _ricercaDirty=false; }
-  if (tab==='ricerca') setTimeout(()=>document.getElementById('ricercaInput')?.focus(),50);
 }
 
 // ═══════════════════════════════════════════════
@@ -1675,7 +1571,6 @@ function renderTable(){
     addDiv.appendChild(addBtn);wrap.appendChild(addDiv);
   }
   updateStats();
-  _ricercaDirty=true;
 }
 
 function renderExpandSection(el,row){
@@ -1739,7 +1634,7 @@ function renderExpandSection(el,row){
           const aRefs=(a.ref||'').split(',').map(s=>s.trim()).filter(Boolean);
           if(aRefs.every(r=>!!row.checks[r]))a.stato='completato';
           refreshDots(row);markDirty();
-          refreshExpandSection(row.id);refreshCardCounters(row.id);renderRicerca();
+          refreshExpandSection(row.id);refreshCardCounters(row.id);
         });
         chipsAtt.appendChild(chipAtt);
       });
@@ -1764,7 +1659,7 @@ function renderExpandSection(el,row){
             if((a.ref||'').split(',').map(s=>s.trim()).includes(c.k)&&a.stato==='completato')a.stato='in attesa';
           });
           refreshDots(row);markDirty();
-          refreshExpandSection(row.id);refreshCardCounters(row.id);renderRicerca();
+          refreshExpandSection(row.id);refreshCardCounters(row.id);
         });
         chipsOk.appendChild(chipOk);
       });
@@ -1979,7 +1874,7 @@ function openCmt(row,btn){
   document.getElementById('cmtOverlay').classList.add('show');
   setTimeout(()=>document.getElementById('cmt-testo').focus(),60);
 }
-function closeCmt(){document.getElementById('cmtOverlay').classList.remove('show');cmtRow=null;cmtBtn=null;cmtEditId=null;renderRicerca();}
+function closeCmt(){document.getElementById('cmtOverlay').classList.remove('show');cmtRow=null;cmtBtn=null;cmtEditId=null;}
 
 function renderCmtList(){
   const list=document.getElementById('cmtList');
@@ -2012,7 +1907,6 @@ function saveCmtEntry(){
   document.getElementById('cmt-testo').value='';document.getElementById('cmt-ref').value='';
   refreshDots(cmtRow);markDirty();renderCmtList();
   if(cmtRow)refreshExpandSection(cmtRow.id);
-  if(activeTab==='ricerca')renderRicerca();
 }
 function startCmtEdit(e){
   cmtEditId=e.id;
@@ -2031,7 +1925,6 @@ function deleteCmt(id){
   if(cmtEditId===id)cancelCmtEdit();
   refreshDots(cmtRow);markDirty();renderCmtList();
   if(cmtRow)refreshExpandSection(cmtRow.id);
-  if(activeTab==='ricerca')renderRicerca();
 }
 function updateCmtBtn(){
   if(!cmtBtn)return;
@@ -2288,7 +2181,6 @@ function saveAsgnEntry(inviata=false){
   asgnCurrentSelected=[];asgnLockedUfficio=null;asgnLockedIsCant=null;
   if(asgnRow)renderAsgnGrid(asgnRow);prefillAsgnForm();updateAsgnButtons();
   refreshDots(asgnRow);markDirty();updateAsgnBtn();renderAsgnList();
-  renderRicerca();
   if(asgnRow){refreshExpandSection(asgnRow.id);refreshCardCounters(asgnRow.id);}
   return true;
 }
@@ -2296,7 +2188,7 @@ function saveAsgnEntry(inviata=false){
 function segnaAssegnato(){
   // FIX: passa inviata=false direttamente, non più post-slice
   saveAsgnEntry(false);
-  renderAsgnList();renderRicerca();
+  renderAsgnList();
   if(asgnRow){refreshExpandSection(asgnRow.id);refreshCardCounters(asgnRow.id);}
 }
 
@@ -2312,7 +2204,6 @@ function openMailto(){
   const saved=saveAsgnEntry(true);
   if(!saved)return;
   refreshDots(asgnRow);renderAsgnList();
-  setTimeout(renderRicerca,0);
   window.open(`mailto:${email}?subject=${encodeURIComponent(ogg)}&body=${encodeURIComponent(body)}`,'_blank');
 }
 
@@ -2379,7 +2270,6 @@ function renderAsgnList(){
             refreshDots(asgnRow);markDirty();
             renderAsgnList();updateAsgnBtn();
             refreshExpandSection(asgnRow.id);refreshCardCounters(asgnRow.id);
-            renderRicerca();
           });
           chipsWrap.appendChild(chip);
         });
@@ -2419,7 +2309,7 @@ function deleteAsgn(id){
   if(!confirm('Eliminare?'))return;
   asgnRow.assegnazioni=asgnRow.assegnazioni.filter(a=>a.id!==id);
   if(asgnEditId===id)cancelAsgnEdit();
-  refreshDots(asgnRow);renderAsgnList();updateAsgnBtn();renderRicerca();
+  refreshDots(asgnRow);renderAsgnList();updateAsgnBtn();
   if(asgnRow){refreshExpandSection(asgnRow.id);refreshCardCounters(asgnRow.id);}
 }
 function updateAsgnBtn(){
@@ -2526,84 +2416,6 @@ function rubShowDetail(idx,edit){
 function openContactModal(){}function closeContactModal(){}function saveContact(){}function deleteContact(){}
 
 // ═══════════════════════════════════════════════
-//  TAB RICERCA
-// ═══════════════════════════════════════════════
-function renderRicerca(){
-  const results=document.getElementById('ricercaResults');
-  const panel=document.getElementById('panel-ricerca');
-  const clearBtn=document.getElementById('ricercaClearBtn');
-  if(!results)return;
-  const q=(document.getElementById('ricercaInput')?.value||'').toLowerCase().trim();
-  if(clearBtn)clearBtn.classList.toggle('visible',q.length>0);
-  if(!q){panel.classList.remove('has-results');results.innerHTML='';return;}
-  panel.classList.add('has-results');
-  results.innerHTML='';
-  const terms=q.split(' ').filter(Boolean);
-  const matched=rows.filter(row=>{
-    const fields=[row.id,row.cliente,row.desc,row.cert,row.pm].map(f=>String(f||'').toLowerCase());
-    return terms.some(t=>fields.some(f=>f===t||f.includes(t)));
-  });
-  if(!matched.length){results.innerHTML='<div style="text-align:center;padding:60px;font-family:var(--mono);font-size:12px;color:var(--text3)">Nessuna commessa trovata per <strong style="color:var(--text2)">'+q+'</strong></div>';return;}
-  matched.forEach((row,_cardIdx)=>{
-    const card=document.createElement('div');card.className='ricerca-card-anim';
-    card.style.cssText='background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:16px;max-width:960px;margin-left:auto;margin-right:auto';
-    card.style.animationDelay=(_cardIdx*60)+'ms';
-    const pC=calcPct(row,CANT),pL=calcPct(row,CLI);
-    const topRow=document.createElement('div');topRow.style.cssText='display:flex;align-items:center;gap:12px;margin-bottom:12px';
-    const idBadge=document.createElement('span');idBadge.style.cssText='font-family:var(--mono);font-size:18px;font-weight:700;color:var(--accent)';idBadge.textContent=row.id;
-    const certBadge=document.createElement('span');
-    if(row.cert){certBadge.style.cssText='font-family:var(--mono);font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px;background:rgba(91,156,246,.15);color:var(--accent);border:1px solid var(--accent)';certBadge.textContent=row.cert;}
-    const titleSpan=document.createElement('span');titleSpan.style.cssText='font-size:14px;font-weight:600;color:var(--text)';titleSpan.textContent=(row.cliente||'')+(row.desc?' — '+row.desc:'');
-    const spacer=document.createElement('div');spacer.style.flex='1';
-    const btnAsgn=document.createElement('button');btnAsgn.className='btn';btnAsgn.style.cssText='font-size:10px;padding:4px 10px';btnAsgn.textContent='🟣 Assegna';btnAsgn.onclick=()=>openAsgn(row,null);
-    topRow.appendChild(idBadge);if(row.cert)topRow.appendChild(certBadge);topRow.appendChild(titleSpan);topRow.appendChild(spacer);topRow.appendChild(btnAsgn);
-    card.appendChild(topRow);
-
-    // Colonne cantiere + cliente
-    const cols=document.createElement('div');cols.style.cssText='display:flex;gap:20px;flex-wrap:wrap';
-    const mkCol=(colCols,colColor,colLabel_,colIcon)=>{
-      const col=document.createElement('div');col.style.cssText='flex:1;min-width:280px';
-      const pct=calcPct(row,colCols);
-      const pctColor=pct===100?'var(--green)':pct>=50?'var(--accent)':pct>=25?'var(--orange)':'var(--red)';
-      const colHead=document.createElement('div');colHead.style.cssText='border-bottom:2px solid '+colColor+';padding-bottom:8px;margin-bottom:10px';
-      const colTitle=document.createElement('div');colTitle.style.cssText='display:flex;align-items:center;justify-content:space-between;margin-bottom:6px';
-      const ctLbl=document.createElement('span');ctLbl.style.cssText='font-family:var(--mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:'+colColor;ctLbl.textContent=colIcon+' '+colLabel_;
-      const ctPct=document.createElement('span');ctPct.style.cssText='font-family:var(--mono);font-size:13px;font-weight:700;color:'+pctColor;ctPct.textContent=pct+'%';
-      colTitle.appendChild(ctLbl);colTitle.appendChild(ctPct);
-      const track=document.createElement('div');track.style.cssText='height:14px;background:var(--border);border-radius:7px;overflow:hidden';
-      const bar=document.createElement('div');bar.style.cssText='height:100%;width:'+pct+'%;border-radius:7px;background:'+pctColor+';transition:width .4s';
-      track.appendChild(bar);colHead.appendChild(colTitle);colHead.appendChild(track);col.appendChild(colHead);
-
-      // Assegnazioni
-      const asgns=(row.assegnazioni||[]).filter(a=>a.stato!=='annullato'&&(a.ref||'').split(',').some(k=>colCols.find(c=>c.k===k)));
-      if(asgns.length){
-        asgns.forEach(a=>{
-          const todaySt=today();
-          const remaining=a.scadenza?Math.round((new Date(a.scadenza)-new Date(todaySt))/86400000):null;
-          const isScaduta=remaining!==null&&remaining<0;
-          const isVicina=remaining!==null&&remaining>=0&&remaining<=3;
-          const barColor=isScaduta?'#e05555':isVicina?'#f5a623':'#2ddb95';
-          const wrap=document.createElement('div');wrap.style.cssText='background:var(--bg);border:1px solid '+(isScaduta?'rgba(224,85,85,.35)':isVicina?'rgba(245,166,35,.35)':'var(--border)')+';border-radius:5px;padding:6px 10px;margin-bottom:6px';
-          const mainRow=document.createElement('div');mainRow.style.cssText='display:flex;align-items:center;gap:6px';
-          const stBadge=document.createElement('span');stBadge.className='log-entry-badge '+(STATO_CSS[a.stato]||'b-attesa');stBadge.textContent=a.stato;
-          const actLbl=document.createElement('span');actLbl.style.cssText='font-size:11px;font-weight:600;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap';actLbl.textContent=refLabels(a.ref)||'Generale';
-          const destLbl=document.createElement('span');destLbl.style.cssText='font-family:var(--mono);font-size:9px;color:var(--text2);white-space:nowrap';destLbl.textContent='👤 '+(a.nome||'—');
-          const scadLbl=document.createElement('span');scadLbl.style.cssText='font-family:var(--mono);font-size:9px;font-weight:600;color:'+barColor+';white-space:nowrap';
-          scadLbl.textContent=remaining===null?'—':isScaduta?'⚠'+Math.abs(remaining)+'g':remaining===0?'⚠oggi':'+'+remaining+'g';
-          mainRow.appendChild(stBadge);mainRow.appendChild(actLbl);mainRow.appendChild(destLbl);mainRow.appendChild(scadLbl);
-          wrap.appendChild(mainRow);col.appendChild(wrap);
-        });
-      }
-      return col;
-    };
-    cols.appendChild(mkCol(CANT,'#f5a623','Doc. Cantiere','🟡'));
-    cols.appendChild(mkCol(CLI,'#2ddb95','Doc. Finale','🟢'));
-    card.appendChild(cols);
-    results.appendChild(card);
-  });
-}
-
-// ═══════════════════════════════════════════════
 //  POPUP DETTAGLIO ATTIVITÀ
 // ═══════════════════════════════════════════════
 let _attDetRow=null,_attDetAsgn=null;
@@ -2636,7 +2448,7 @@ function attDetOpenEdit(){
   const foot=document.createElement('div');foot.style.cssText='display:flex;gap:8px;margin-top:16px;justify-content:flex-end';
   const btnCancel=document.createElement('button');btnCancel.className='btn';btnCancel.textContent='Annulla';btnCancel.onclick=()=>openAttDet(_attDetRow,_attDetAsgn);
   const btnSave=document.createElement('button');btnSave.className='btn save';btnSave.textContent='💾 Salva';
-  btnSave.onclick=()=>{a.scadenza=inpScad.value;markDirty();openAttDet(_attDetRow,a);renderRicerca();renderAttivita();};// FIX: aggiorna pannello Attività
+  btnSave.onclick=()=>{a.scadenza=inpScad.value;markDirty();openAttDet(_attDetRow,a);renderAttivita();};// FIX: aggiorna pannello Attività
   foot.appendChild(btnCancel);foot.appendChild(btnSave);ct.appendChild(foot);
   ['attDetFatto','attDetRiapri','attDetAnnulla','attDetSollecita','attDetEdit'].forEach(id=>{const b=document.getElementById(id);if(b)b.style.display='none';});
 }
@@ -2644,7 +2456,7 @@ function attDetElimina(){
   if(!_attDetRow||!_attDetAsgn)return;
   if(!confirm('Eliminare questa assegnazione?\n\n'+(_attDetAsgn.oggetto||'')))return;
   _attDetRow.assegnazioni=_attDetRow.assegnazioni.filter(a=>a.id!==_attDetAsgn.id);
-  refreshDots(_attDetRow);markDirty();closeAttDet();renderRicerca();
+  refreshDots(_attDetRow);markDirty();closeAttDet();
 }
 function attDetSollecita(){
   if(!_attDetAsgn)return;
@@ -2662,16 +2474,14 @@ function setAsgnRiapri(asgn,row){
   asgn.stato='in attesa';
   const refs=(asgn.ref||'').split(',').map(s=>s.trim()).filter(Boolean);
   refs.forEach(k=>{if(row.checks.hasOwnProperty(k))row.checks[k]=false;});
-  refreshDots(row);_ricercaDirty=true;renderTable();_ricercaDirty=true;
-  if(activeTab==='ricerca'){renderRicerca();_ricercaDirty=false;}
+  refreshDots(row);renderTable();
   markDirty();
 }
 function setAsgnFatto(asgn,row){
   asgn.stato='completato';
   const refs=(asgn.ref||'').split(',').map(s=>s.trim()).filter(Boolean);
   refs.forEach(k=>{if(row.checks.hasOwnProperty(k))row.checks[k]=true;});
-  refreshDots(row);renderTable();_ricercaDirty=true;
-  if(activeTab==='ricerca'){renderRicerca();_ricercaDirty=false;}
+  refreshDots(row);renderTable();
   markDirty();
 }
 function attDetSetStato(stato){
@@ -2679,7 +2489,7 @@ function attDetSetStato(stato){
   if(stato==='completato'&&_attDetRow)setAsgnFatto(_attDetAsgn,_attDetRow);
   else if(stato==='in attesa'&&_attDetRow)setAsgnRiapri(_attDetAsgn,_attDetRow);
   else{_attDetAsgn.stato=stato;if(_attDetRow)refreshDots(_attDetRow);markDirty();}
-  closeAttDet();renderRicerca();
+  closeAttDet();
 }
 
 // ═══════════════════════════════════════════════
