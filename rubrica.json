@@ -1,0 +1,82 @@
+{
+  "contatti": [
+    {
+      "nome": "Lorenzo",
+      "cognome": "Bertolazzi",
+      "email": "lorenzo.bertolazzi@sms-group.com",
+      "ufficio": "sicurezza"
+    },
+    {
+      "nome": "Giuseppe",
+      "cognome": "Benedetti",
+      "email": "giuseppe.benedetti@sms-group.com",
+      "ufficio": "elettrico"
+    },
+    {
+      "nome": "Giambattista",
+      "cognome": "Peroni",
+      "email": "giambattista.peroni@sms-group.com",
+      "ufficio": "tecnico"
+    },
+    {
+      "nome": "Daniele",
+      "cognome": "Di Stefano",
+      "email": "daniele.distefano@sms-group.com"
+    },
+    {
+      "nome": "Giovanni",
+      "cognome": "Martinelli",
+      "email": "giovanni.martinelli@sms-group.com",
+      "ufficio": "idraulica"
+    },
+    {
+      "nome": "Sandro",
+      "cognome": "Tonelli",
+      "email": "alessandro.tonelli@sms-group.com",
+      "ufficio": "layout"
+    },
+    {
+      "nome": "Maurizio",
+      "cognome": "Magnani",
+      "email": "maurizio.magnani@sms-group.com",
+      "ufficio": "combustione"
+    },
+    {
+      "nome": "Marco",
+      "cognome": "Schreiber",
+      "email": "marco.schreiber@sms-group.com"
+    },
+    {
+      "nome": "Enrico",
+      "cognome": "Freri",
+      "email": "enrico.freri@omav.com"
+    },
+    {
+      "nome": "Andrea",
+      "cognome": "Santini",
+      "email": "",
+      "ufficio": "manualistica"
+    },
+    {
+      "nome": "Cesare",
+      "cognome": "Finadri",
+      "email": "cesare.finadri@sms-group.com"
+    },
+    {
+      "nome": "Alessandro",
+      "cognome": "Ravaglia",
+      "email": "alessandro.ravaglia@sms-group.com"
+    },
+    {
+      "nome": "Fabio",
+      "cognome": "Sardella",
+      "email": "fabio.manuelsardella@sms-group.com"
+    },
+    {
+      "nome": "Roberto",
+      "cognome": "Brambilla",
+      "email": "roberto.brambilla@sms-group.com",
+      "ufficio": "handling"
+    }
+  ]
+}
